@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =2
+let g:netrw_dirhist_2='/afs/physnet.uni-hamburg.de/users/th1_li/alehmann/projects/cis/my_pfn_2019/Uebungen/Blatt10.Harkov.Lehmann.Music/Aufgabe2/SplitnumberItrv'
+let g:netrw_dirhist_1='/afs/physnet.uni-hamburg.de/users/th1_li/alehmann/projects/cis/pfn1_2019/Uebungen/Blatt10/Aufgabe2/SplitnumberItrv'
+let g:netrw_dirhist_0='/afs/physnet.uni-hamburg.de/users/th1_li/alehmann/projects/cis/pfn1_2019/Uebungen/Blatt10/Aufgabe2'
+let g:netrw_dirhist_9='/afs/physnet.uni-hamburg.de/users/th1_li/alehmann/projects/cis/pfn1_2019/Uebungen/Blatt10'
+let g:netrw_dirhist_8='/afs/physnet.uni-hamburg.de/users/th1_li/alehmann/projects/cis/pfn1_2019/Uebungen/Blatt10/Aufgabe1'
+let g:netrw_dirhist_7='/afs/physnet.uni-hamburg.de/users/th1_li/alehmann/projects/cis/pfn1_2019/Uebungen/Blatt10/Aufgabe1/sortingPeer'
+let g:netrw_dirhist_6='/afs/physnet.uni-hamburg.de/users/th1_li/alehmann/projects/cis/pfn1_2019/Uebungen/Blatt10/Aufgabe1'
+let g:netrw_dirhist_5='/afs/physnet.uni-hamburg.de/users/th1_li/alehmann/projects/cis/pfn1_2019/Uebungen/Blatt10'
+let g:netrw_dirhist_4='/afs/physnet.uni-hamburg.de/users/th1_li/alehmann/projects/cis/pfn1_2019/Uebungen'
+let g:netrw_dirhist_3='/afs/physnet.uni-hamburg.de/users/th1_li/alehmann/projects/cis/pfn1_2019'

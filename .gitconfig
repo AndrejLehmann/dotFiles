@@ -1,0 +1,31 @@
+[alias]
+   st = status
+   ci = commit -a
+   br = branch
+   co = checkout
+   clog = log --graph --full-history --color --pretty=format:\"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s\"
+   cloga = log --graph --full-history --all --color --pretty=format:\"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s\"
+[user]
+   name = Andrej Lehmann
+   email = alehmann@physnet.uni-hamburg.de
+[merge]
+       tool = opendiff
+       defaultToUpstream = true
+[mergetool]
+       keepBackup = false
+       tool = opendiff
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+  interactive = auto
+  ui = true
+  pager = true
+[push]
+   default = tracking
+
+[core]
+        excludesfile = /Users/tron/.gitignore_global
+        editor = vi
+        pager = less -+F
+
