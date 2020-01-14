@@ -116,9 +116,9 @@ Plugin 'tpope/vim-vinegar'
 Plugin 'tpope/vim-fugitive' " git wrapper. For help and bindings :Gstatus, g? .Tutorials on github 
 Plugin 'brennier/quicktex' "ab vim 7.8
 Plugin 'tpope/vim-repeat' " Adding support to a plugin is generally as simple as the following command at the end of your map functions:
-                                                                                                                                       " silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
+                          " silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
 "Plugin 'tpope/vim-surround'   " find examples at github
-"Plugin 'tpope/vim-commentary' " gc2j : Comment down two lines
+Plugin 'tpope/vim-commentary' " gc2j : Comment down two lines
                                " gcc  : Comment out the current line
                                " gcip : Comment out the current paragraph
                                " If a file type isn't supported, adjust 'commentstring': autocmd FileType apache setlocal commentstring=#\ %s

@@ -26,6 +26,6 @@
 
 [core]
         excludesfile = /Users/tron/.gitignore_global
-        editor = vi
+        editor = vim
         pager = less -+F
 
