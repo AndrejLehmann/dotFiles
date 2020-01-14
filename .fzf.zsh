@@ -1,0 +1,1 @@
+/home/hhpal3hm/dotFiles/.fzf.zsh
