@@ -1,0 +1,3 @@
+.dircolors clone from: https://github.com/gibbling666/dircolors.git
+
+.fzf clone from: https://github.com/junegunn/fzf.git
