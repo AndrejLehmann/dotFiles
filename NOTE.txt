@@ -4,6 +4,6 @@
 
 all vim plugins are github repositories. So do:
 $ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-in vim:
-$ PluginInstall
+And in vim:
+:PluginInstall
 
