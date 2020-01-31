@@ -19,7 +19,7 @@ export FZF_DEFAULT_OPTS="--color hl+:214,hl:202 --extended --reverse"  #
 # ---------------------------------------------------------------------#
 
 
-# v-- Wegen des Fehlers "Catastrophic error: could not set locale "" to allow processing of multibyte character" beim compilieren des Otsuki-solvers
+# v-- Wegen des Fehlers: "Catastrophic error: could not set locale "" to allow processing of multibyte character" beim compilieren des Otsuki-solvers
 export LC_ALL=en_US.UTF-8                #
 export LANG=en_US.UTF-8                  #
 export LANGUAGE=en_US.UTF-8              #
