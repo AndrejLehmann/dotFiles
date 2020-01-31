@@ -167,7 +167,7 @@ Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " Install fz
 Plugin 'junegunn/fzf.vim'
 "Plugin 'vim-latex/vim-latex'
 "Plugin 'lervag/vimtex'
-Plugin 'cyboflash/hlnext' " delete 'gg' in .vim/bundle/hlnext/plugin/hlnext.vim L.68: let &cpo = s:save_cpogg
+" Plugin 'cyboflash/hlnext' " delete 'gg' in .vim/bundle/hlnext/plugin/hlnext.vim L.68: let &cpo = s:save_cpogg . It is still buggy.
 "Plugin 'mariappan/dragvisuals.vim' " moves visual block
 "Plugin 'gioele/vim-autoswap' " autohandle .swp files:
                              " 1. Is file already open in another Vim session in some other window?
