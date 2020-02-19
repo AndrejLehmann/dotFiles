@@ -179,18 +179,6 @@ call vundle#end()
 
 
 
-" ----- dragvisuals.vim -----
-
-"runtime plugin/dragvisuals.vim
-"let g:DVB_TrimWS = 1
-"vmap  <expr>  <C-D>       DVB_Duplicate()
-"vmap  <expr>  <C-h>       DVB_Drag('left')
-"vmap  <expr>  <C-l>       DVB_Drag('right')
-"vmap  <expr>  <C-j>       DVB_Drag('down')
-"vmap  <expr>  <C-k>       DVB_Drag('up')
-
-
-
 " ----- fzf -----
 
 nnoremap <silent> <leader>o :FZF<CR>
@@ -401,8 +389,8 @@ nnoremap <C-n> :call NumberToggle()<cr>
 
 set tabstop=8 softtabstop=0 expandtab shiftwidth=2 smarttab
 
-nnoremap <C-o> gt
-nnoremap <C-i> gT
+nnoremap <C-l> gt
+noremap <C-h> gT
 nnoremap <C-1> 1gt
 nnoremap <C-2> 2gt
 nnoremap <C-3> 3gt
@@ -414,15 +402,6 @@ nnoremap <C-8> 8gt
 nnoremap <C-9> 9gt
 nnoremap <C-0> :tablast<CR>
 
-
-
-" ----- Tabs -----
-
-"Navigate tabs with Ctrl+w+h/j/k/l
-"nnoremap <C-w><C-right> <C-h><C-w>
-"noremap <C-w><C-down> <C-j><C-w>
-"nnoremap <C-w><C-up> <C-k><C-w>
-"nnoremap <C-w><C-left> <C-l><C-w>
 
 
 " ---- gundo settings ----
