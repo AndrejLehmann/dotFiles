@@ -108,6 +108,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'ludovicchabant/vim-gutentags' " Use ctags first to set up tags
 Plugin 'morhetz/gruvbox' " colorscheme
 Plugin 'w0ng/vim-hybrid' " colorscheme
 Plugin 'tpope/vim-vinegar'
@@ -389,8 +390,8 @@ nnoremap <C-n> :call NumberToggle()<cr>
 
 set tabstop=8 softtabstop=0 expandtab shiftwidth=2 smarttab
 
-nnoremap <C-l> gt
-noremap <C-h> gT
+nnoremap <C-s> gt
+noremap <C-g> gT
 nnoremap <C-1> 1gt
 nnoremap <C-2> 2gt
 nnoremap <C-3> 3gt
