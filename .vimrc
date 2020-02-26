@@ -15,7 +15,6 @@
 "vno <up> <Nop>
 
 
-
 " ----- Remap Esc to Caps Lock -----
 
 "if $DISPLAY
@@ -62,6 +61,7 @@ set ma
 " ----- vim-vinegar initializes dot files hidden -----
 
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
+let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
 
 
 
@@ -71,7 +71,8 @@ let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 "Hit tab to :find by partial math
 "Use * to make it fuzzy
 "set path+=** "Search down into subfolder. Provides tab-completion for all file-related tasks
-set wildmenu "Display all matching files when tab-completed
+set wildmode=longest:full
+set wildmenu
 
 set rtp+=~/.fzf " for fzf in vim
 
@@ -115,7 +116,7 @@ Plugin 'tpope/vim-vinegar'
 "Plugin 'SirVer/ultisnips' " Track the engine. Tutorials on github.
 "Plugin 'honza/vim-snippets' " Snippets are separated from the engine. Add this if you want them.
 Plugin 'tpope/vim-fugitive' " git wrapper. For help and bindings :Gstatus, g? .Tutorials on github 
-Plugin 'brennier/quicktex' "ab vim 7.8
+Plugin 'brennier/quicktex'  "ab vim 7.8
 Plugin 'tpope/vim-repeat' " Adding support to a plugin is generally as simple as the following command at the end of your map functions:
                                                                                                                                        " silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
 "Plugin 'tpope/vim-surround'   " find examples at github
@@ -166,15 +167,12 @@ Plugin 'libclang-vim/vim-textobj-clang' " c/c++ text objects:
 Plugin 'sjl/gundo.vim' " graphical undo history. Requirements: Vim 7.3+, Python support for Vim, Python 2.4+
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " Install fzf in command line and vim
 Plugin 'junegunn/fzf.vim'
-"Plugin 'vim-latex/vim-latex'
-"Plugin 'lervag/vimtex'
-" Plugin 'cyboflash/hlnext' " delete 'gg' in .vim/bundle/hlnext/plugin/hlnext.vim L.68: let &cpo = s:save_cpogg . It is still buggy.
-"Plugin 'mariappan/dragvisuals.vim' " moves visual block
+"Plugin 'cyboflash/hlnext' " delete 'gg' in .vim/bundle/hlnext/plugin/hlnext.vim L.68: let &cpo = s:save_cpogg . It is still buggy.
 "Plugin 'gioele/vim-autoswap' " autohandle .swp files:
-                             " 1. Is file already open in another Vim session in some other window?
-                             "    If so, swap to the window where we are editing that file.
-                             " 2. Otherwise, if swapfile is older than file itself, delete it.
-                             " 3. Otherwise, open file read-only so we can have a look at it and may save it.
+                              " 1. Is file already open in another Vim session in some other window?
+                              "    If so, swap to the window where we are editing that file.
+                              " 2. Otherwise, if swapfile is older than file itself, delete it.
+                              " 3. Otherwise, open file read-only so we can have a look at it and may save it.
 
 call vundle#end()
 
@@ -390,8 +388,8 @@ nnoremap <C-n> :call NumberToggle()<cr>
 
 set tabstop=8 softtabstop=0 expandtab shiftwidth=2 smarttab
 
-nnoremap <C-s> gt
-noremap <C-g> gT
+nnoremap <C-w> gt
+noremap <C-e> gT
 nnoremap <C-1> 1gt
 nnoremap <C-2> 2gt
 nnoremap <C-3> 3gt
@@ -411,3 +409,15 @@ nnoremap <F5> :GundoToggle<CR>"
 let g:gundo_width = 60
 let g:gundo_preview_height = 40
 " for more: https://sjl.bitbucket.io/gundo.vim/
+
+
+" ---- clipboard ----
+" Copy yank buffer to system clipboard
+" Use OSC52 to put things into the system clipboard. Works over SSH.
+"function! Osc52Yank()
+"  let buffer=system('base64 -w0', @0)
+"  let buffer='\ePtmux;\e\e]52;c;'.buffer.'\x07\e\\'
+"                                                                 v-- tty in terminal
+"  silent exe "!echo -ne ".shellescape(buffer)." > ".shellescape('/dev/pts/23')
+"endfunction
+"nnoremap <leader>y :call Osc52Yank()<CR>
