@@ -417,9 +417,7 @@ let g:gundo_preview_height = 40
 
 " ----- use the clipboard as the default register -----
 
-set pastetoggle=<F2>
+"set pastetoggle=<F2>
 set clipboard=unnamedplus
              "^-- the + register (X Window clipboard)
-
-
 
