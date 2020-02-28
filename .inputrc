@@ -30,6 +30,7 @@
 
 
 
+# SHORT CUTS
 # Ctrl-u  :  Delete from cursor to the beginning of line
 # U       :  Undo all
 # *       :  insert all possible completions
