@@ -15,6 +15,9 @@
 "vno <up> <Nop>
 
 
+
+autocmd! bufwritepost .vimrc source %
+
 " ----- Remap Esc to Caps Lock -----
 
 "if $DISPLAY
@@ -411,13 +414,12 @@ let g:gundo_preview_height = 40
 " for more: https://sjl.bitbucket.io/gundo.vim/
 
 
-" ---- clipboard ----
-" Copy yank buffer to system clipboard
-" Use OSC52 to put things into the system clipboard. Works over SSH.
-"function! Osc52Yank()
-"  let buffer=system('base64 -w0', @0)
-"  let buffer='\ePtmux;\e\e]52;c;'.buffer.'\x07\e\\'
-"                                                                 v-- tty in terminal
-"  silent exe "!echo -ne ".shellescape(buffer)." > ".shellescape('/dev/pts/23')
-"endfunction
-"nnoremap <leader>y :call Osc52Yank()<CR>
+
+" ----- use the clipboard as the default register -----
+
+set pastetoggle=<F2>
+set clipboard=unnamedplus
+             "^-- the + register (X Window clipboard)
+
+
+
