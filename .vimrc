@@ -419,5 +419,9 @@ let g:gundo_preview_height = 40
 
 "set pastetoggle=<F2>
 set clipboard=unnamedplus
-             "^-- the + register (X Window clipboard)
+             "^-- the + register (X Window clipboard [Ctrl-c,Ctrl-v])
+"set clipboard=unnamed
+              "^-- the * register (X11 primary selection [middle mouse button])
+" check for clipboard support:
+" $ vim --version | grep clipboard
 
