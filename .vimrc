@@ -109,19 +109,21 @@ set rtp+=~/.vim/bundle/Vundle.vim "The runtime path
 
 call vundle#begin()
 
+" ~/.vim/plugin/highlights.vim          " https://vim.fandom.com/wiki/Highlight_multiple_words
+Plugin 'tpope/vim-unimpaired'
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'ludovicchabant/vim-gutentags' " Use ctags first to set up tags
-Plugin 'morhetz/gruvbox' " colorscheme
-Plugin 'w0ng/vim-hybrid' " colorscheme
+Plugin 'ludovicchabant/vim-gutentags'   " Use ctags first to set up tags
+Plugin 'morhetz/gruvbox'       " colorscheme
+Plugin 'w0ng/vim-hybrid'       " colorscheme
 Plugin 'tpope/vim-vinegar'
-"Plugin 'SirVer/ultisnips' " Track the engine. Tutorials on github.
-"Plugin 'honza/vim-snippets' " Snippets are separated from the engine. Add this if you want them.
-Plugin 'tpope/vim-fugitive' " git wrapper. For help and bindings :Gstatus, g? .Tutorials on github 
-Plugin 'brennier/quicktex'  "ab vim 7.8
-Plugin 'tpope/vim-repeat' " Adding support to a plugin is generally as simple as the following command at the end of your map functions:
-                                                                                                                                       " silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
+"Plugin 'SirVer/ultisnips'     " Track the engine. Tutorials on github.
+"Plugin 'honza/vim-snippets'   " Snippets are separated from the engine. Add this if you want them.
+Plugin 'tpope/vim-fugitive'    " git wrapper. For help and bindings :Gstatus, g? .Tutorials on github 
+Plugin 'brennier/quicktex'     " ab vim 7.8
+Plugin 'tpope/vim-repeat'      " Adding support to a plugin by the following command at the end of your map functions:
+                               " silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
 "Plugin 'tpope/vim-surround'   " find examples at github
 "Plugin 'tpope/vim-commentary' " gc2j : Comment down two lines
                                " gcc  : Comment out the current line
@@ -281,7 +283,7 @@ let g:airline_symbols.whitespace = ''
 " ----- Display unprintable characters ----- 
 
 "  v--- https://stackoverflow.com/questions/32588604/vim-airline-what-is-trailing1
-set list 
+set list
 set listchars=tab:•\ ,trail:•,extends:»,precedes:« " Unprintable chars mapping
 " More on highlighting unwanted spaces: http://vim.wikia.com/wiki/Highlight_unwanted_spaces
 
@@ -336,10 +338,10 @@ colorscheme gruvbox
 
 
 " ----- highlight the 81 column -----
-"highlight ColorColumn ctermbg=magenta
-"set colorcolumn=81
+highlight ColorColumn ctermbg=black
+set colorcolumn=81
 "                            v-- regex
-call matchadd('ColorColumn','\%81v',100) "only if line size > 81 columns
+"call matchadd('ColorColumn','\%81v',100) "only if line size > 81 columns
 
 
 
@@ -352,7 +354,7 @@ call matchadd('ColorColumn','\%81v',100) "only if line size > 81 columns
 
 
 
-" ----- n/N always searching forward -----
+" ----- n/N always searching forward/backward -----
 
 noremap n /<CR>
 noremap N ?<CR>
@@ -365,9 +367,34 @@ noremap N ?<CR>
 
 
 " ----- highlight search -----
-"
+
 set hlsearch
 nnoremap <C-c> :set hlsearch!<CR>
+
+highlight CursorHlGroup ctermbg=black ctermfg=green guibg=black guifg=green
+
+"nnoremap n n:call HighlightWordAtCursor()<CR>
+"nnoremap <S-n> <S-n>:call HighlightWordAtCursor()<CR>
+"autocmd CursorMoved * call RemoveHighlightWordAtCursor()
+
+"nnoremap <C-b> :call BlinkWordAtCursor()<CR>
+nnoremap <C-b> :call HighlightWordAtCursor()<CR>
+              \:sleep 100m<CR>
+              \:call RemoveHighlightWordAtCursor()<CR>
+              \:sleep 100m<CR>
+              \:call HighlightWordAtCursor()<CR>
+              \:sleep 100m<CR>
+              \:call RemoveHighlightWordAtCursor()<CR>
+
+
+function! HighlightWordAtCursor()
+  match CursorHlGroup /\k*\%#\k*/
+ "match CursorHlGroup /\%#/
+endfunction
+
+function! RemoveHighlightWordAtCursor()
+  match None
+endfunction
 
 
 
@@ -418,10 +445,25 @@ let g:gundo_preview_height = 40
 " ----- use the clipboard as the default register -----
 
 "set pastetoggle=<F2>
-set clipboard=unnamedplus
+"set clipboard=unnamedplus
              "^-- the + register (X Window clipboard [Ctrl-c,Ctrl-v])
-"set clipboard=unnamed
+set clipboard=unnamed
               "^-- the * register (X11 primary selection [middle mouse button])
 " check for clipboard support:
 " $ vim --version | grep clipboard
 
+
+
+" Cursor xterm colors
+"function! HlCursor()
+"  if &term =~ "xterm\\|rxvt"
+"    " use cursor color in insert mode
+"    let &t_SI = "\<Esc>]12;DeepSkyBlue4\x7"
+"    " use cursor color  otherwise
+"    let &t_EI = "\<Esc>]12;DarkSeaGreen4\x7"
+"    silent !echo -ne "\033]12;green\007"
+"    " reset cursor when vim exits
+"    autocmd VimLeave * silent !echo -ne "\033]112\007"
+"    " use \003]12;gray\007 for gnome-terminal
+"  endif
+"endfunction
