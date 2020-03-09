@@ -16,14 +16,13 @@
 
 
 
-autocmd! bufwritepost .vimrc source %
+autocmd! bufwritepost .vimrc source %  " source .vimrc after saving
 
 " ----- Remap Esc to Caps Lock -----
 
 "if $DISPLAY
 "Maps Esc to the Caps lock key when Vim entered
-"au VimEnter * !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape' "<-- included in .bashrc
-
+"au VimEnter * !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'  " now included in .bashrc
 
 "Returns normal functionality to caps lock when Vim quited
 "au VimLeave * !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
@@ -34,14 +33,13 @@ autocmd! bufwritepost .vimrc source %
 
 " ----- Allow us to use Ctrl-s and Ctrl-q as keybinds -----
 silent !stty -ixon
-" Restore default behaviour when leaving Vim.
-autocmd VimLeave * silent !stty ixon
+autocmd VimLeave * silent !stty ixon  " Restore default behaviour when leaving
 
 
 
 " ----- spell checking set to Ctrl-s -----
 
-noremap <C-s> :setlocal spell! spelllang=en_us<CR>
+noremap <leader>s :setlocal spell! spelllang=en_us<CR>
 
 " press Ctrl-n or Ctrl-p in insert-mode to complete the word
 "set complete+=kspell
@@ -110,6 +108,7 @@ set rtp+=~/.vim/bundle/Vundle.vim "The runtime path
 call vundle#begin()
 
 " ~/.vim/plugin/highlights.vim          " https://vim.fandom.com/wiki/Highlight_multiple_words
+"Plugin 'vimwiki/vimwiki'       " for taking notes etc.
 Plugin 'tpope/vim-unimpaired'
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'vim-airline/vim-airline'
@@ -130,11 +129,11 @@ Plugin 'tpope/vim-repeat'      " Adding support to a plugin by the following com
                                " gcip : Comment out the current paragraph
                                " If a file type isn't supported, adjust 'commentstring': autocmd FileType apache setlocal commentstring=#\ %s
 
-Plugin 'christoomey/vim-system-copy' " cpi' : copy inside single quotes to system clipboard
-                                     " cvi' : paste inside single quotes from system clipboard
-                                     " cP   : copy the current line
-                                     " cV   : paste the content of system clipboard to the next line.
-                                     " Clipboard Utilities: OSX - pbcopy and pbpaste, Linux - xsel
+"Plugin 'christoomey/vim-system-copy' " cpi' : copy inside single quotes to system clipboard
+"                                     " cvi' : paste inside single quotes from system clipboard
+"                                     " cP   : copy the current line
+"                                     " cV   : paste the content of system clipboard to the next line.
+"                                     " Clipboard Utilities: OSX - pbcopy and pbpaste, Linux - xsel
 
 Plugin 'kana/vim-textobj-user' " for the following text objects
 Plugin 'bkad/CamelCaseMotion'       " indentifies CamelCase  and underscore_notation as words
@@ -284,7 +283,7 @@ let g:airline_symbols.whitespace = ''
 
 "  v--- https://stackoverflow.com/questions/32588604/vim-airline-what-is-trailing1
 set list
-set listchars=tab:•\ ,trail:•,extends:»,precedes:« " Unprintable chars mapping
+silent set listchars=tab:•\ ,trail:•,extends:»,precedes:« " Unprintable chars mapping
 " More on highlighting unwanted spaces: http://vim.wikia.com/wiki/Highlight_unwanted_spaces
 
 
@@ -369,7 +368,7 @@ noremap N ?<CR>
 " ----- highlight search -----
 
 set hlsearch
-nnoremap <C-c> :set hlsearch!<CR>
+nnoremap <leader>c :set hlsearch!<CR>
 
 highlight CursorHlGroup ctermbg=black ctermfg=green guibg=black guifg=green
 
@@ -377,24 +376,23 @@ highlight CursorHlGroup ctermbg=black ctermfg=green guibg=black guifg=green
 "nnoremap <S-n> <S-n>:call HighlightWordAtCursor()<CR>
 "autocmd CursorMoved * call RemoveHighlightWordAtCursor()
 
-"nnoremap <C-b> :call BlinkWordAtCursor()<CR>
-nnoremap <C-b> :call HighlightWordAtCursor()<CR>
-              \:sleep 100m<CR>
-              \:call RemoveHighlightWordAtCursor()<CR>
-              \:sleep 100m<CR>
-              \:call HighlightWordAtCursor()<CR>
-              \:sleep 100m<CR>
-              \:call RemoveHighlightWordAtCursor()<CR>
-
-
-function! HighlightWordAtCursor()
+function! BlinkWordAtCursor()
   match CursorHlGroup /\k*\%#\k*/
- "match CursorHlGroup /\%#/
-endfunction
-
-function! RemoveHighlightWordAtCursor()
+  set cursorcolumn
+  redraw  " the screen
+  sleep 80m
   match None
+  set nocursorcolumn
+  redraw
+  :sleep 80m
+  match CursorHlGroup /\k*\%#\k*/
+  set cursorcolumn
+  redraw
+  :sleep 80m
+  match None
+  set nocursorcolumn
 endfunction
+nnoremap <leader>b :call BlinkWordAtCursor()<CR>
 
 
 
@@ -410,7 +408,7 @@ function! NumberToggle()
   set number!
   set relativenumber!
 endfunc
-nnoremap <C-n> :call NumberToggle()<cr>
+nnoremap <leader>n :call NumberToggle()<cr>
 
 
 
@@ -444,13 +442,20 @@ let g:gundo_preview_height = 40
 
 " ----- use the clipboard as the default register -----
 
-"set pastetoggle=<F2>
-"set clipboard=unnamedplus
+set clipboard=unnamedplus
              "^-- the + register (X Window clipboard [Ctrl-c,Ctrl-v])
-set clipboard=unnamed
+"set clipboard=unnamed
               "^-- the * register (X11 primary selection [middle mouse button])
 " check for clipboard support:
 " $ vim --version | grep clipboard
+
+"" Alternative:
+"""" SYSTEM CLIPBOARD COPY & PASTE SUPPORT
+set pastetoggle=<F2> "F2 before pasting to preserve indentation
+""Copy paste to/from clipboard
+"vnoremap <C-c> "*y
+"map <silent><Leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>"
+"map <silent><Leader><S-p> :set paste<CR>O<esc>"*]p:set nopaste<cr>"
 
 
 
