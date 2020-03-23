@@ -119,7 +119,7 @@ Plugin 'w0ng/vim-hybrid'       " colorscheme
 Plugin 'tpope/vim-vinegar'
 "Plugin 'SirVer/ultisnips'     " Track the engine. Tutorials on github.
 "Plugin 'honza/vim-snippets'   " Snippets are separated from the engine. Add this if you want them.
-Plugin 'tpope/vim-fugitive'    " git wrapper. For help and bindings :Gstatus, g? .Tutorials on github 
+Plugin 'tpope/vim-fugitive'    " git wrapper. For help and bindings :Gstatus, g? .Tutorials on github
 Plugin 'brennier/quicktex'     " ab vim 7.8
 Plugin 'tpope/vim-repeat'      " Adding support to a plugin by the following command at the end of your map functions:
                                " silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
@@ -279,11 +279,11 @@ let g:airline_symbols.whitespace = ''
 
 
 
-" ----- Display unprintable characters ----- 
+" ----- Display unprintable characters -----
 
 "  v--- https://stackoverflow.com/questions/32588604/vim-airline-what-is-trailing1
 set list
-silent set listchars=tab:•\ ,trail:•,extends:»,precedes:« " Unprintable chars mapping
+silent! set listchars=tab:•\ ,trail:•,extends:»,precedes:« " Unprintable chars mapping
 " More on highlighting unwanted spaces: http://vim.wikia.com/wiki/Highlight_unwanted_spaces
 
 
@@ -353,18 +353,6 @@ set colorcolumn=81
 
 
 
-" ----- n/N always searching forward/backward -----
-
-noremap n /<CR>
-noremap N ?<CR>
-"nnoremap <expr> n 'Nn'[v:searchforward]
-"nnoremap <expr> N 'nN'[v:searchforward]
-" or
-"nnoremap <expr> n (v:searchforward ? 'n' : 'N')
-"nnoremap <expr> N (v:searchforward ? 'N' : 'n')
-
-
-
 " ----- highlight search -----
 
 set hlsearch
@@ -377,22 +365,33 @@ highlight CursorHlGroup ctermbg=black ctermfg=green guibg=black guifg=green
 "autocmd CursorMoved * call RemoveHighlightWordAtCursor()
 
 function! BlinkWordAtCursor()
-  match CursorHlGroup /\k*\%#\k*/
-  set cursorcolumn
-  redraw  " the screen
-  sleep 80m
-  match None
-  set nocursorcolumn
-  redraw
-  :sleep 80m
-  match CursorHlGroup /\k*\%#\k*/
-  set cursorcolumn
-  redraw
-  :sleep 80m
-  match None
-  set nocursorcolumn
+  for n in [1,2]
+    match CursorHlGroup /\k*\%#\k*/
+    "set cursorcolumn
+    "set cursorline
+    redraw  " the screen
+    sleep 100m
+    match None
+    "set nocursorcolumn
+    "set nocursorline
+    redraw
+    sleep 100m
+  endfor
 endfunction
 nnoremap <leader>b :call BlinkWordAtCursor()<CR>
+" with n/N always searching forward/backword
+nnoremap n /<CR>:call BlinkWordAtCursor()<CR>
+nnoremap <S-n> ?<CR>:call BlinkWordAtCursor()<CR>
+
+
+
+" ----- alternative n/N always searching forward/backward -----
+
+"nnoremap <expr> n 'Nn'[v:searchforward]
+"nnoremap <expr> N 'nN'[v:searchforward]
+" or
+"nnoremap <expr> n (v:searchforward ? 'n' : 'N')
+"nnoremap <expr> N (v:searchforward ? 'N' : 'n')
 
 
 
@@ -416,8 +415,8 @@ nnoremap <leader>n :call NumberToggle()<cr>
 
 set tabstop=8 softtabstop=0 expandtab shiftwidth=2 smarttab
 
-nnoremap <C-w> gt
-noremap <C-e> gT
+nnoremap <C-g> gt
+noremap <C-s> gT
 nnoremap <C-1> 1gt
 nnoremap <C-2> 2gt
 nnoremap <C-3> 3gt
@@ -449,26 +448,10 @@ set clipboard=unnamedplus
 " check for clipboard support:
 " $ vim --version | grep clipboard
 
-"" Alternative:
-"""" SYSTEM CLIPBOARD COPY & PASTE SUPPORT
-set pastetoggle=<F2> "F2 before pasting to preserve indentation
-""Copy paste to/from clipboard
-"vnoremap <C-c> "*y
-"map <silent><Leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>"
-"map <silent><Leader><S-p> :set paste<CR>O<esc>"*]p:set nopaste<cr>"
 
 
-
-" Cursor xterm colors
-"function! HlCursor()
-"  if &term =~ "xterm\\|rxvt"
-"    " use cursor color in insert mode
-"    let &t_SI = "\<Esc>]12;DeepSkyBlue4\x7"
-"    " use cursor color  otherwise
-"    let &t_EI = "\<Esc>]12;DarkSeaGreen4\x7"
-"    silent !echo -ne "\033]12;green\007"
-"    " reset cursor when vim exits
-"    autocmd VimLeave * silent !echo -ne "\033]112\007"
-"    " use \003]12;gray\007 for gnome-terminal
-"  endif
-"endfunction
+" https://vim.fandom.com/wiki/Remove_unwanted_spaces
+autocmd BufWritePre * %s/\s\+$//e  " automatically remove trailing white spaces
+set wrap                           " #
+set linebreak                      " # handle desired trainling white spaces
+set showbreak=>\ \ \               " #
