@@ -344,25 +344,11 @@ set colorcolumn=81
 
 
 
-" ----- Use <,> for f/t searching -----
-" <,> sind gemaped auf Einrueckungen
-"no , <Nop>
-"no ; <Nop>
-"nnoremap < ,
-"nnoremap > ;
-
-
-
 " ----- highlight search -----
 
 set hlsearch
 nnoremap <leader>c :set hlsearch!<CR>
-
 highlight CursorHlGroup ctermbg=black ctermfg=green guibg=black guifg=green
-
-"nnoremap n n:call HighlightWordAtCursor()<CR>
-"nnoremap <S-n> <S-n>:call HighlightWordAtCursor()<CR>
-"autocmd CursorMoved * call RemoveHighlightWordAtCursor()
 
 function! BlinkWordAtCursor()
   for n in [1,2]
@@ -370,18 +356,25 @@ function! BlinkWordAtCursor()
     "set cursorcolumn
     "set cursorline
     redraw  " the screen
-    sleep 100m
+    sleep 80m
     match None
     "set nocursorcolumn
     "set nocursorline
     redraw
-    sleep 100m
+    sleep 80m
   endfor
 endfunction
+
 nnoremap <leader>b :call BlinkWordAtCursor()<CR>
 " with n/N always searching forward/backword
 nnoremap n /<CR>:call BlinkWordAtCursor()<CR>
 nnoremap <S-n> ?<CR>:call BlinkWordAtCursor()<CR>
+nnoremap * *:call BlinkWordAtCursor()<CR>
+nnoremap # #:call BlinkWordAtCursor()<CR>
+"nnoremap n n:call HighlightWordAtCursor()<CR>
+"nnoremap <S-n> <S-n>:call HighlightWordAtCursor()<CR>
+"autocmd CursorMoved * call RemoveHighlightWordAtCursor()
+
 
 
 
