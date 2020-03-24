@@ -107,8 +107,7 @@ set rtp+=~/.vim/bundle/Vundle.vim "The runtime path
 
 call vundle#begin()
 
-" ~/.vim/plugin/highlights.vim          " https://vim.fandom.com/wiki/Highlight_multiple_words
-"Plugin 'vimwiki/vimwiki'       " for taking notes etc.
+Plugin 'vimwiki/vimwiki'  " for taking notes etc. Use Pandoc to convert to HMLT or Markdown
 Plugin 'tpope/vim-unimpaired'
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'vim-airline/vim-airline'
