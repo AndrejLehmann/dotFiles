@@ -39,7 +39,7 @@ set show-all-if-ambiguous on
 set completion-ignore-case on
 
 set editing-mode vi
-set keymap vi-command
 # mapping for command mode
-set keymap vi-insert
+set keymap vi-command
 # mapping for insert mode
+set keymap vi-insert
