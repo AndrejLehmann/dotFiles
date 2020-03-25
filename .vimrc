@@ -1,21 +1,4 @@
 
-" ----- Unmap the arrow keys -----
-
-"no <down> <Nop>
-"no <left> <Nop>
-"no <right> <Nop>
-"no <up> <Nop>
-"ino <down> <Nop>
-"ino <left> <Nop>
-"ino <right> <Nop>
-"ino <up> <Nop>
-"vno <down> <Nop>
-"vno <left> <Nop>
-"vno <right> <Nop>
-"vno <up> <Nop>
-
-
-
 autocmd! bufwritepost .vimrc source %  " source .vimrc after saving
 
 " ----- Remap Esc to Caps Lock -----
@@ -179,6 +162,26 @@ Plugin 'junegunn/fzf.vim'
 
 call vundle#end()
 
+" ----- vimwiki -----
+
+" e.g. settings:
+"let g:vimwiki_list = [{'path': '~/notes/wiki1/', 'syntax': 'markdown'}]
+"au FileType vimwiki setlocal shiftwidth=6 tabstop=6 noexpandtab
+
+" wikis
+let wiki_vimwiki = {}
+let wiki_vimwiki.path = '~/notes/vimwikis/vimwiki/'
+
+let wiki_vim = {}
+let wiki_vim.path = '~/notes/vimwikis/vim/'
+
+let g:vimwiki_list = [wiki_vimwiki, wiki_vim]
+
+" for bold and italic text
+" also read: Vim, Tmux, Italics, and Insanity :
+" https://jsatk.us/vim-tmux-italics-and-insanity-9a96b69eeca6
+let &t_ZH="\e[3m"
+let &t_ZR="\e[23m"
 
 
 " ----- fzf -----
