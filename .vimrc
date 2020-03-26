@@ -20,17 +20,6 @@ autocmd VimLeave * silent !stty ixon  " Restore default behaviour when leaving
 
 
 
-" ----- spell checking set to Ctrl-s -----
-
-noremap <leader>s :setlocal spell! spelllang=en_us<CR>
-
-" press Ctrl-n or Ctrl-p in insert-mode to complete the word
-"set complete+=kspell
-
-" add a word to a dictionary: cursor over the word and type 'zg'
-
-
-
 " ----- Enable syntax and plugins (for netrw) -----
 
 syntax enable
@@ -90,12 +79,13 @@ set rtp+=~/.vim/bundle/Vundle.vim "The runtime path
 
 call vundle#begin()
 
-Plugin 'vimwiki/vimwiki'  " for taking notes etc. Use Pandoc to convert to HMLT or Markdown
+Plugin 'vimwiki/vimwiki'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'ludovicchabant/vim-gutentags'   " Use ctags first to set up tags
+Plugin 'ludovicchabant/vim-gutentags'
+Plugin 'lervag/vimtex'
 Plugin 'morhetz/gruvbox'       " colorscheme
 Plugin 'w0ng/vim-hybrid'       " colorscheme
 Plugin 'tpope/vim-vinegar'
@@ -162,6 +152,14 @@ Plugin 'junegunn/fzf.vim'
 
 call vundle#end()
 
+
+
+" ----- quicktex -----
+
+so ~/.vim/my_quicktex/tex.vim
+
+
+
 " ----- vimwiki -----
 
 " e.g. settings:
@@ -182,6 +180,19 @@ let g:vimwiki_list = [wiki_vimwiki, wiki_vim]
 " https://jsatk.us/vim-tmux-italics-and-insanity-9a96b69eeca6
 let &t_ZH="\e[3m"
 let &t_ZR="\e[23m"
+
+
+
+" --- vimtex ---
+let g:vimtex_view_general_viewer = 'zathura'
+
+" if issuing :VimtexView [:h vimtex_viewer_zathura]
+"let g:vimtex_view_zathura_hook_view = 'ViewerPosition'
+"function! ViewerPosition() abort dict
+"  call self.move('0 0')
+"  call self.resize('1600 876')
+"endfunction
+
 
 
 " ----- fzf -----
@@ -450,3 +461,22 @@ autocmd BufWritePre * %s/\s\+$//e  " automatically remove trailing white spaces
 set wrap                           " #
 set linebreak                      " # handle desired trainling white spaces
 set showbreak=>\ \ \               " #
+
+
+
+" ----- spell checking -----
+" have these lines at the end of .vimrc
+
+noremap <leader>s :setlocal spell! spelllang=en_us<CR>
+
+hi clear SpellBad
+"hi SpellBad cterm=underline ctermfg=red
+hi SpellBad ctermfg=red
+
+" press Ctrl-n or Ctrl-p in insert-mode to complete the word
+"set complete+=kspell
+
+" add a word to a dictionary: cursor over the word and type 'zg'
+
+
+
