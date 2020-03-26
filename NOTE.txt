@@ -1,5 +1,6 @@
 make syslink:
 $ ln -sv ~/dotFiles/.bashrc ~/
+'~' is important
 
 
 .dircolors clone from: https://github.com/gibbling666/dircolors.git
